@@ -28,7 +28,7 @@ export const actions = {
   },
 
   // Logs in the current user.
-  logIn({ commit, dispatch, getters }, { username, password } = {}) {
+  logIn({ commit, dispatch, getters }, { username, password }) {
     if (getters.loggedIn) return dispatch('validate')
 
     return axios

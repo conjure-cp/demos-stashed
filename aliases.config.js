@@ -18,7 +18,7 @@ const aliases = {
 module.exports = {
   webpack: {},
   jest: {},
-  jsconfig: {},
+  tsconfig: {},
 }
 
 for (const alias in aliases) {
@@ -29,11 +29,12 @@ for (const alias in aliases) {
     ? `<rootDir>/${aliasTo}`
     : `<rootDir>/${aliasTo}/index.js`
   module.exports.jest[`^${alias}/(.*)$`] = `<rootDir>/${aliasTo}/$1`
-  module.exports.jsconfig[alias + '/*'] = [aliasTo + '/*']
-  module.exports.jsconfig[alias] = aliasTo.includes('/index.')
+  module.exports.tsconfig[alias + '/*'] = [aliasTo + '/*']
+  module.exports.tsconfig[alias] = aliasTo.includes('/index.')
     ? [aliasTo]
     : [
         aliasTo + '/index.js',
+        aliasTo + '/index.ts',
         aliasTo + '/index.json',
         aliasTo + '/index.vue',
         aliasTo + '/index.scss',
@@ -41,17 +42,17 @@ for (const alias in aliases) {
       ]
 }
 
-const jsconfigTemplate = require('./jsconfig.template') || {}
-const jsconfigPath = path.resolve(__dirname, 'jsconfig.json')
+const tsconfigTemplate = require('./tsconfig.template') || {}
+const tsconfigPath = path.resolve(__dirname, 'tsconfig.json')
 
 fs.writeFile(
-  jsconfigPath,
+  tsconfigPath,
   prettier.format(
     JSON.stringify({
-      ...jsconfigTemplate,
+      ...tsconfigTemplate,
       compilerOptions: {
-        ...(jsconfigTemplate.compilerOptions || {}),
-        paths: module.exports.jsconfig,
+        ...(tsconfigTemplate.compilerOptions || {}),
+        paths: module.exports.tsconfig,
       },
     }),
     {
@@ -62,7 +63,7 @@ fs.writeFile(
   (error) => {
     if (error) {
       console.error(
-        'Error while creating jsconfig.json from aliases.config.js.'
+        'Error while creating tsconfig.json from aliases.config.js.'
       )
       throw error
     }

@@ -1,6 +1,5 @@
 <script>
 import Layout from '@layouts/main.vue'
-import { authMethods } from '@state/helpers'
 import appConfig from '@src/app.config'
 
 export default {
@@ -28,7 +27,6 @@ export default {
     },
   },
   methods: {
-    ...authMethods,
     // Try to log the user in with the username
     // and password they provided.
     tryToLogIn() {

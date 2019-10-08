@@ -1,24 +1,32 @@
 module.exports = {
   root: true,
+
   parserOptions: {
     sourceType: 'script',
+    parser: '@typescript-eslint/parser',
   },
+
   extends: [
-    // https://github.com/vuejs/eslint-plugin-vue#bulb-rules
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'prettier/@typescript-eslint',
     'plugin:vue/recommended',
-    // https://github.com/standard/standard/blob/master/docs/RULES-en.md
-    'standard',
-    // https://github.com/prettier/eslint-config-prettier
-    'prettier',
-    'prettier/standard',
-    'prettier/vue',
+    '@vue/standard',
+    '@vue/typescript',
+    '@vue/prettier',
   ],
+
   rules: {
     // Only allow debugger in development
     'no-debugger': process.env.PRE_COMMIT ? 'error' : 'off',
     // Only allow `console.log` in development
     'no-console': process.env.PRE_COMMIT
-      ? ['error', { allow: ['warn', 'error'] }]
+      ? [
+          'error',
+          {
+            allow: ['warn', 'error'],
+          },
+        ]
       : 'off',
     'vue/array-bracket-spacing': 'error',
     'vue/arrow-spacing': 'error',
@@ -48,6 +56,7 @@ module.exports = {
     ],
     'vue/valid-v-slot': 'error',
   },
+
   overrides: [
     {
       files: ['src/**/*', 'tests/unit/**/*', 'tests/e2e/**/*'],
@@ -65,7 +74,9 @@ module.exports = {
         parser: 'babel-eslint',
         sourceType: 'module',
       },
-      env: { jest: true },
+      env: {
+        jest: true,
+      },
       globals: {
         mount: false,
         shallowMount: false,
@@ -74,5 +85,14 @@ module.exports = {
         createModuleStore: false,
       },
     },
+  ],
+
+  extends: [
+    'plugin:vue/recommended',
+    'standard',
+    'prettier',
+    'prettier/standard',
+    'prettier/vue',
+    '@vue/typescript',
   ],
 }

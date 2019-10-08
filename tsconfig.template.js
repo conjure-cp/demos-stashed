@@ -1,0 +1,25 @@
+// This is a template for a jsconfig.json file which will be
+// generated when starting the dev server or a build.
+
+module.exports = {
+  baseUrl: '.',
+  include: ['src/**/*', 'tests/**/*'],
+  exclude: ['node_modules/**'],
+  compilerOptions: {
+    baseUrl: '.',
+    target: 'esnext',
+    module: 'commonjs',
+    strict: true,
+    jsx: 'react',
+    jsxFactory: 'h',
+    importHelpers: true,
+    moduleResolution: 'node',
+    experimentalDecorators: true,
+    esModuleInterop: true,
+    noImplicitAny: false,
+    strictNullChecks: false,
+    strictFunctionTypes: false,
+    allowSyntheticDefaultImports: true,
+    sourceMap: true,
+  },
+}
