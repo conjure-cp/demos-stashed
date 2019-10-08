@@ -1,10 +1,6 @@
 module.exports = {
   root: true,
 
-  parserOptions: {
-    parser: '@typescript-eslint/parser',
-  },
-
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
@@ -60,7 +56,8 @@ module.exports = {
     {
       files: ['src/**/*', 'tests/unit/**/*', 'tests/e2e/**/*'],
       parserOptions: {
-        parser: 'babel-eslint',
+        parser: '@typescript-eslint/parser',
+
         sourceType: 'module',
       },
       env: {
@@ -70,7 +67,8 @@ module.exports = {
     {
       files: ['**/*.unit.js'],
       parserOptions: {
-        parser: 'babel-eslint',
+        parser: '@typescript-eslint/parser',
+
         sourceType: 'module',
       },
       env: {
