@@ -2,7 +2,6 @@ module.exports = {
   root: true,
 
   parserOptions: {
-    sourceType: 'script',
     parser: '@typescript-eslint/parser',
   },
 

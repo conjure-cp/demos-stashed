@@ -13,7 +13,7 @@
     "docs": "vuepress dev",
     "lint:all:eslint": "yarn lint:eslint --ext .js,.vue .",
     "lint:all:markdownlint": "yarn lint:markdownlint \"docs/*.md\" \"*.md\"",
-    "lint:all:prettier": "yarn lint:prettier \"**/*.{js,json,css,scss,vue,html,md}\"",
+    "lint:all:prettier": "yarn lint:prettier \"**/*.{js,ts,json,css,scss,vue,html,md}\"",
     "lint:all:stylelint": "yarn lint:stylelint \"src/**/*.{vue,scss}\"",
     "lint:eslint": "eslint --fix",
     "lint:markdownlint": "markdownlint",
@@ -75,6 +75,7 @@
     "ts-jest": "^23.0.0",
     "typescript": "^3.2.1",
     "vue-cli-plugin-typescript": "^0.0.1",
+    "vue-eslint-parser": "^6.0.4",
     "vue-template-compiler": "2.6.10",
     "vuepress": "1.1.x"
   },
