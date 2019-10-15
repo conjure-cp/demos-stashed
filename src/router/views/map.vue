@@ -1,19 +1,17 @@
 <script>
 import appConfig from '@src/app.config'
 import Layout from '@layouts/main.vue'
+import OpenStreetMap from '@components/OpenStreetMap.vue'
 
 export default {
   page: {
     title: 'Map',
     meta: [{ name: 'description', content: appConfig.description }],
   },
-  components: { Layout },
+  components: { OpenStreetMap },
 }
 </script>
 
 <template>
-  <Layout>
-    <h1>Map Page</h1>
-    <img src="@assets/images/logo.png" alt="Logo" />
-  </Layout>
+  <OpenStreetMap></OpenStreetMap>
 </template>
