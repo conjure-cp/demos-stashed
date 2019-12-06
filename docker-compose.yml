@@ -4,7 +4,7 @@ volumes:
   dependencies:
 
 services:
-  dev:
+  front:
     build:
       context: .
       dockerfile: ./docker-dev.dockerfile
@@ -14,3 +14,15 @@ services:
       - .:/app
       - dependencies:/app/node_modules
     tty: true
+
+  solver:
+    build:
+      context: ./server
+    ports:
+      - 4000:4000
+    volumes:
+      - ./server:/app
+      - dependencies:/app/node_modules
+    tty: true
+    environment:
+      - PORT_NUMBER=4000
