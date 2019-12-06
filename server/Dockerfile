@@ -1,15 +1,14 @@
-FROM node:slim
-
-ARG PORT_NUMBER
+FROM node:12
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY package*.json yarn.lock ./
 
-RUN yarn
+RUN yarn \
+  && mv /app/node_modules /node_modules
 
 COPY . .
 
-EXPOSE $PORT_NUMBER
+EXPOSE 4000
 
-RUN yarn start:dev
+CMD ["yarn", "start:dev"]

@@ -1,6 +1,7 @@
 const util = require('util')
 const spawn = util.promisify(require('child_process').spawn)
 
+import * as fs from 'fs';
 import * as path from 'path';
 import { Problem } from "./model/problem.model";
 
@@ -37,6 +38,12 @@ export const constructConjureArgs = (job: Problem) =>
  */
 export const runOnConjure = async (job: Problem) => {
   const args = constructConjureArgs(job);
+  const dir = getJobWorkingDirectory(job.id);
 
-  return spawn('conjure', args, {});
+  fs.mkdirSync(dir);
+  fs.writeFileSync(path.join(dir, `job.essence`), job.essence);
+  fs.writeFileSync(path.join(dir, `job.param`), job.params);
+
+  console.log(args);
+  return spawn(path.join(__dirname, '../../bin/conjure'), args, {});
 }

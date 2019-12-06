@@ -1,8 +1,5 @@
 version: '3.7'
 
-volumes:
-  dependencies:
-
 services:
   front:
     build:
@@ -12,17 +9,15 @@ services:
       - 8080:8080
     volumes:
       - .:/app
-      - dependencies:/app/node_modules
     tty: true
 
   solver:
     build:
       context: ./server
-    ports:
-      - 4000:4000
     volumes:
       - ./server:/app
-      - dependencies:/app/node_modules
+    ports:
+      - 4000:4000
     tty: true
     environment:
       - PORT_NUMBER=4000

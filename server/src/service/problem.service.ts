@@ -4,6 +4,7 @@ import { Problem } from "../core/model/problem.model";
 import { ProblemInput } from "../inputs/problem.input";
 import uuid = require("uuid");
 import { Scheduler } from "../core/scheduler";
+import { classToPlain, plainToClass } from "class-transformer";
 
 /**
  * Service class to manage
@@ -13,7 +14,7 @@ export class ProblemService {
 
   constructor(private scheduler: Scheduler) {}
 
-  async addProblem(problem: ProblemInput) {
+  async addProblem(problem: ProblemInput): Promise<ProblemDto> {
     // Construct a problem from this dto
 
     const internalProblem = new Problem();
@@ -22,6 +23,8 @@ export class ProblemService {
     internalProblem.id = uuid.v4();
 
     this.scheduler.add(internalProblem);
+
+    return plainToClass(ProblemDto, internalProblem);
   }
 
   async findById(id: string): Promise<ProblemDto> {

@@ -41,13 +41,13 @@ export class ProblemResolver {
 
   @Mutation(returns => ProblemDto)
   async addProblem(
-    @Arg('problem') problem: ProblemInput
+    @Arg('problem') problemInput: ProblemInput
   ): Promise<ProblemDto> {
-    const payload = plainToClass(ProblemDto, problem);
+    const payload = plainToClass(ProblemDto, problemInput);
 
-    await this.problemService.addProblem(problem);
-    await this.pubSub.publish(PROBLEMS, payload)
-    return payload;
+    const problem = await this.problemService.addProblem(problemInput);
+    await this.pubSub.publish(PROBLEMS, problem);
+    return problem;
   }
 
   @Subscription(returns => ProblemDto, {

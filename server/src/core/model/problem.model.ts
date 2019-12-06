@@ -4,9 +4,9 @@
 export class Problem {
   id: string;
 
-  essence: ArrayBuffer;
+  essence: Buffer;
 
-  params: ArrayBuffer;
+  params: Buffer;
 
   status: ProblemStatus;
 }
