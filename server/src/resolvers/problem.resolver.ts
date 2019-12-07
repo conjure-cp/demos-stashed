@@ -32,7 +32,7 @@ export const PROBLEMS = 'PROBLEMS';
 export class ProblemResolver {
 
   constructor(private readonly problemService: ProblemService,
-            @Inject('PUB_SUB') private readonly pubSub: PubSubEngine) {}
+            private readonly pubSub: PubSubEngine) {}
 
   @Query(returns => ProblemDto)
   async Problem(@Arg('id') id: string): Promise<ProblemDto> {
@@ -52,11 +52,10 @@ export class ProblemResolver {
 
   @Subscription(returns => ProblemDto, {
     topics: PROBLEMS,
-    filter: ({ args, payload }: ResolverFilterData<ProblemDto>) =>
-      payload.id === args.id,
+    filter: ({ args, payload }: ResolverFilterData<ProblemDto>) => payload.id === args.id,
     nullable: true,
   })
-  subscribeProblems(@Arg('id') id: string, @Root() problem: ProblemDto) {
+  async subscribeProblems(@Arg('id') id: string, @Root() problem: ProblemDto) {
     return problem;
   }
 }

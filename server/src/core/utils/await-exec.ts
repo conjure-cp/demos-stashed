@@ -1,6 +1,6 @@
 const spawn = require('child_process').spawn
 
-export const promiseSpawn = (cmd: string, args: string[] = [], opts: any = {}, input: string = '') =>
+export const promiseSpawn = (cmd: string, args: string[] = [], opts: any = { timeout: 100000 }, input: string = '') =>
   new Promise((resolve, reject) => {
     const stdout = []
     const stderr = []
@@ -11,9 +11,19 @@ export const promiseSpawn = (cmd: string, args: string[] = [], opts: any = {}, i
       delete options.stdio
     }
 
+
     const child = spawn(cmd, args, options)
 
-    child.on('error', (err) => reject(err));
+    if (options.timeout) {
+      setTimeout(() => {
+        child.stdin.pause();
+        child.kill();
+      }, options.timeout);
+
+      delete options.timeout;
+    }
+
+    child.on('error', (err) => reject(err))
     child.stdout.on('error', (err) => reject(err));
     child.stderr.on('error', (err) => reject(err));
     child.stdin.on('error', (err) => reject(err));

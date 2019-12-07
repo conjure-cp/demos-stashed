@@ -5,6 +5,7 @@ import { ProblemInput } from "../inputs/problem.input";
 import uuid = require("uuid");
 import { Scheduler } from "../core/scheduler";
 import { classToPlain, plainToClass } from "class-transformer";
+import { NotFoundException } from "../errors/not-found.exception";
 
 /**
  * Service class to manage
@@ -20,6 +21,7 @@ export class ProblemService {
     const internalProblem = new Problem();
     internalProblem.essence = Buffer.from(problem.essence, 'base64');
     internalProblem.params = Buffer.from(problem.params, 'base64');
+    internalProblem.status = 'QUEUED';
     internalProblem.id = uuid.v4();
 
     this.scheduler.add(internalProblem);
@@ -28,6 +30,8 @@ export class ProblemService {
   }
 
   async findById(id: string): Promise<ProblemDto> {
-    return this.scheduler.problemQueue.find(p => p.id === id);
+    const problem = this.scheduler.problemQueue.find(p => p.id === id);
+    if (!problem) throw new NotFoundException();
+    return problem;
   }
 }

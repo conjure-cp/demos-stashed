@@ -15,4 +15,4 @@ export class Problem {
   status: ProblemStatus;
 }
 
-export type ProblemStatus = 'QUEUED' | 'RUNNING' | 'COMPLETED' | 'FAILED'
+export type ProblemStatus = 'QUEUED' | 'ACCEPTED' | 'RUNNING' | 'COMPLETED' | 'FAILED'

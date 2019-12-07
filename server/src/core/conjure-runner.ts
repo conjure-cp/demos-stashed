@@ -46,7 +46,7 @@ export const runOnConjure = async (job: Problem): Promise<ConjureResponse[]> => 
    result = await promiseSpawn('conjure', args, { encoding: 'utf-8' })
  } catch (e) {
    console.log(e)
-   return null;
+   throw e;
  }
 
   /*

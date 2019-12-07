@@ -8,7 +8,7 @@ import { ProblemService } from './service/problem.service'
 import { Container } from 'typedi'
 import { pubSub } from './pubsub'
 
-Container.set('PUB_SUB', pubSub);
+Container.set(PubSubEngine, pubSub);
 
 
 const bootstrap = async () => {
@@ -18,6 +18,8 @@ const bootstrap = async () => {
     // automatically create `schema.gql` file with schema definition in current folder
     emitSchemaFile: path.resolve(__dirname, 'schema.gql'),
     container: Container,
+    pubSub,
+
   })
 
   // Create GraphQL server
@@ -25,6 +27,9 @@ const bootstrap = async () => {
     schema,
     // enable GraphQL Playground
     playground: true,
+    subscriptions: {
+      onConnect()
+    }
   })
 
   // Start the server

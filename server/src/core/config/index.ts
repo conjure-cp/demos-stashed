@@ -2,5 +2,5 @@ import { Service } from "typedi";
 
 @Service()
 export class Config {
-  parallelSolvers: number = 10;
+  parallelSolvers: number = 2;
 }

@@ -3,6 +3,11 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
 type Mutation {
   addProblem(problem: ProblemInput!): ProblemDto!
 }
@@ -10,6 +15,7 @@ type Mutation {
 type ProblemDto {
   id: ID!
   status: String!
+  solutions: [JSON!]!
 }
 
 input ProblemInput {
