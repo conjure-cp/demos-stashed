@@ -1,4 +1,5 @@
 import { InputType, Field } from "type-graphql";
+import { SolverType } from "../core/model/solvers/solvers.type";
 
 @InputType()
 export class ProblemInput {
@@ -13,4 +14,7 @@ export class ProblemInput {
    */
   @Field()
   params: string;
+
+  @Field({ nullable: true })
+  solver?: SolverType;
 }
