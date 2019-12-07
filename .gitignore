@@ -31,4 +31,4 @@ yarn-error.log*
 *.sw*
 
 server/bin/
-conjure-output
+server/solutions/**

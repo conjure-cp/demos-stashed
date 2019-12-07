@@ -4,6 +4,7 @@ import { sleep } from "./utils/sleep";
 import { Config } from "./config";
 import { runOnConjure } from "./conjure-runner";
 import { PubSubEngine } from "type-graphql";
+import { PROBLEMS } from "../resolvers/problem.resolver";
 
 @Service()
 export class Scheduler {
@@ -36,7 +37,21 @@ export class Scheduler {
 
     problem.status = 'RUNNING';
 
-    runOnConjure(problem);
+    this.pubSub.publish(PROBLEMS, problem);
+
+    let solutions;
+
+    try {
+      solutions = await runOnConjure(problem);
+      problem.status = 'COMPLETED';
+      problem.solutions = solutions;
+    } catch (e) {
+      problem.status = 'FAILED';
+    }
+
+    console.log(`[${problem.id}] Finished with status ${problem.status}`)
+
+    this.pubSub.publish(PROBLEMS, problem);
   }
 
   /**

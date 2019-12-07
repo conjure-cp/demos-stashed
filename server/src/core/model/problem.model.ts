@@ -1,3 +1,5 @@
+import { ConjureResponse } from "./solvers/conjure.solution";
+
 /**
  * Internal problem model
  */
@@ -7,6 +9,8 @@ export class Problem {
   essence: Buffer;
 
   params: Buffer;
+
+  solutions: ConjureResponse[];
 
   status: ProblemStatus;
 }
