@@ -27,9 +27,6 @@ const bootstrap = async () => {
     schema,
     // enable GraphQL Playground
     playground: true,
-    subscriptions: {
-      onConnect()
-    }
   })
 
   // Start the server
